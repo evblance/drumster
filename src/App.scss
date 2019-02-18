@@ -1,0 +1,30 @@
+@import "./_partials/variables";
+
+* {
+    box-sizing: border-box;
+}
+
+.app-title {
+    font: $headingFont;
+    text-align: center;
+}
+
+.drum-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 1rem;
+    margin: 0 auto;
+    max-width: 300px;
+    justify-items: center;
+    align-items: center;
+}
+
+.drum-pad {
+    display: grid;
+    text-align: center;
+    height: $drumpadSize;
+    width: $drumpadSize;
+    justify-items: center;
+    align-items: center;
+    background: $drumpadInactiveColour;
+}
