@@ -16,13 +16,21 @@ class DrumMachine extends Component<DrumMachineProps, DrumMachineState> {
         this.state = {
             lastDrumpad: undefined,
         };
+        this.reportSoundTrigger = this.reportSoundTrigger.bind(this);
+    }
+
+    reportSoundTrigger(drumKey: EDrumKeys): void {
+        this.setState({
+            lastDrumpad: drumKey,
+        });
+        console.log(this.state.lastDrumpad);
     }
 
     render(): JSX.Element {
         return (
             <div id="drum-machine">
                 <h1 className="app-title">Drum Machine</h1>
-                <DrumGrid />
+                <DrumGrid handleSoundTrigger={this.reportSoundTrigger} />
                 <Display activeDrumpad={this.state.lastDrumpad} />
             </div>
         );

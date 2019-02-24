@@ -8,6 +8,7 @@ interface DrumpadProps {
     drumKey: EDrumKeys,
     title: string,
     sound: EDrumSound,
+    onSoundTrigger: Function,
 }
 
 interface DrumpadState {}
@@ -40,6 +41,7 @@ class Drumpad extends Component<DrumpadProps, DrumpadState> {
     playSound(): void {
         this.audioRef.current.currentTime = 0;
         this.audioRef.current.play();
+        this.props.onSoundTrigger(this.props.drumKey);
     }
 
     handleKeyPress(event: any): void {
