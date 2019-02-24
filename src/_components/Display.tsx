@@ -11,7 +11,6 @@ const Display = (props: DisplayProps) => {
         props.activeDrumpad && 
         MDKeyToSnd.get(Object(EDrumKeys)[props.activeDrumpad])!.replace(`-`, ` `).toUpperCase() ||
         `-`;
-    console.log(drumSoundVal);
     return (
         <div id="display" className="display">
             Now playing: <div>{drumSoundVal}</div>

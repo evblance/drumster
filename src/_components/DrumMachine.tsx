@@ -23,7 +23,6 @@ class DrumMachine extends Component<DrumMachineProps, DrumMachineState> {
         this.setState({
             lastDrumpad: drumKey,
         });
-        console.log(this.state.lastDrumpad);
     }
 
     render(): JSX.Element {
