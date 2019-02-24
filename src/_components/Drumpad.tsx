@@ -23,7 +23,6 @@ class Drumpad extends Component<DrumpadProps, DrumpadState> {
         this.state = {};
         this.audioRef = React.createRef();
         this.playSound = this.playSound.bind(this);
-        this.handleKeyPress = this.handleKeyPress.bind(this);
     }
 
     componentDidMount(): void {
@@ -44,19 +43,12 @@ class Drumpad extends Component<DrumpadProps, DrumpadState> {
         this.props.onSoundTrigger(this.props.drumKey);
     }
 
-    handleKeyPress(event: any): void {
-        if (MDSndToSrc.has(event.target.value)) {
-            this.playSound();
-        }
-    }
-
     render(): JSX.Element {
         return (
             <div
                 id={this.props.sound}
                 className="drum-pad"
                 onClick={this.playSound}
-                onKeyPress={this.handleKeyPress}
             >
                 { this.props.title }
                 <audio id={this.props.title} ref={this.audioRef} className="clip" src={MDSndToSrc.get(this.props.sound)} />
