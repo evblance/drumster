@@ -48,7 +48,7 @@ class Drumpad extends Component<DrumpadProps, DrumpadState> {
         }
     }
 
-    render() {
+    render(): JSX.Element {
         return (
             <div
                 id={this.props.sound}
