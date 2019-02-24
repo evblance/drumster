@@ -43,7 +43,6 @@ class Drumpad extends Component<DrumpadProps, DrumpadState> {
     }
 
     handleKeyPress(event: any): void {
-        console.log(event);
         if (MDSndToSrc.has(event.target.value)) {
             this.playSound();
         }
