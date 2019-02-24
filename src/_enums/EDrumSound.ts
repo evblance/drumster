@@ -4,8 +4,8 @@ enum EDrumSound {
     HIGH_HAT_OPEN = 'high-hat-open',
     SNARE_DRUM = 'snare-drum',
     FLOOR_TOM = 'floor-tom',
-    CRASH_CYMBAL = 'crash_cymbal',
-    RIDE_CYMBAL = 'ride_cymbal',
+    CRASH_CYMBAL = 'crash-cymbal',
+    RIDE_CYMBAL = 'ride-cymbal',
     LOW_TOM = 'low-tom',
     HIGH_TOM = 'high-tom',
 }
