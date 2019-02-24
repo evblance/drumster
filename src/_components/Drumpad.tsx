@@ -25,7 +25,7 @@ class Drumpad extends Component<DrumpadProps, DrumpadState> {
         this.handleKeyPress = this.handleKeyPress.bind(this);
     }
 
-    componentDidMount() {
+    componentDidMount(): void {
         this.keypressListener = document.addEventListener('keypress', (event: KeyboardEvent) => {
             if (MDKeyToSnd.get(event.key) === this.props.sound) {
                 this.playSound();
@@ -33,7 +33,7 @@ class Drumpad extends Component<DrumpadProps, DrumpadState> {
         });
     }
 
-    componentWillUnmount() {
+    componentWillUnmount(): void {
         document.removeEventListener('keypress', this.keypressListener);
     }
 
