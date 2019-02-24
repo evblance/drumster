@@ -1,6 +1,9 @@
 import React from 'react';
+import EDrumKeys from '../_enums/EDrumKey';
 
-interface DisplayProps {}
+interface DisplayProps {
+    activeDrumpad: EDrumKeys | undefined,
+}
 
 const Display = (props: DisplayProps) => {
     return (

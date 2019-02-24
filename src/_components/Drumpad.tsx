@@ -1,38 +1,52 @@
 import React, { Component } from 'react';
 import EDrumSound from '../_enums/EDrumSound';
+import EDrumKeys from '../_enums/EDrumKey';
+import MDSndToSrc from '../_maps/MDSoundToSrc';
+import MDKeyToSnd from '../_maps/MDKeyToSnd';
 
 interface DrumpadProps {
+    drumKey: EDrumKeys,
     title: string,
     sound: EDrumSound,
 }
 
-interface DrumpadState {
-
-}
-
-const MDSndToSrc: Map<EDrumSound, string> = new Map<EDrumSound, string>([
-    [EDrumSound.CRASH_CYMBAL, `../_assets/sounds/${EDrumSound.CRASH_CYMBAL}`],
-    [EDrumSound.RIDE_CYMBAL, `../_assets/sounds/${EDrumSound.RIDE_CYMBAL}`],
-    [EDrumSound.HIGH_HAT_OPEN, `../_assets/sounds/${EDrumSound.HIGH_HAT_OPEN}`],
-    [EDrumSound.FLOOR_TOM, `../_assets/sounds/${EDrumSound.FLOOR_TOM}`],
-    [EDrumSound.LOW_TOM, `../_assets/sounds/${EDrumSound.LOW_TOM}`],
-    [EDrumSound.HIGH_TOM, `../_assets/sounds/${EDrumSound.HIGH_TOM}`],
-    [EDrumSound.BASS_DRUM, `../_assets/sounds/${EDrumSound.BASS_DRUM}`],
-    [EDrumSound.SNARE_DRUM, `../_assets/sounds/${EDrumSound.SNARE_DRUM}`],
-    [EDrumSound.HIGH_HAT_CLOSED, `../_assets/sounds/${EDrumSound.HIGH_HAT_CLOSED}`],
-]);
+interface DrumpadState {}
 
 class Drumpad extends Component<DrumpadProps, DrumpadState> {
+
+    audioRef: any;
+    keypressListener: any;
 
     constructor(props: DrumpadProps) {
         super(props);
         this.state = {};
+        this.audioRef = React.createRef();
         this.playSound = this.playSound.bind(this);
+        this.handleKeyPress = this.handleKeyPress.bind(this);
+    }
+
+    componentDidMount() {
+        this.keypressListener = document.addEventListener('keypress', (event: KeyboardEvent) => {
+            if (MDKeyToSnd.get(event.key) === this.props.sound) {
+                this.playSound();
+            }
+        });
+    }
+
+    componentWillUnmount() {
+        document.removeEventListener('keypress', this.keypressListener);
     }
 
     playSound(): void {
-        console.log('Playing sound');
-        const element: HTMLAudioElement = document.getElementById(this.props.title) as HTMLAudioElement;
+        this.audioRef.current.currentTime = 0;
+        this.audioRef.current.play();
+    }
+
+    handleKeyPress(event: any): void {
+        console.log(event);
+        if (MDSndToSrc.has(event.target.value)) {
+            this.playSound();
+        }
     }
 
     render() {
@@ -41,9 +55,10 @@ class Drumpad extends Component<DrumpadProps, DrumpadState> {
                 id={this.props.sound}
                 className="drum-pad"
                 onClick={this.playSound}
+                onKeyPress={this.handleKeyPress}
             >
                 { this.props.title }
-                <audio id={this.props.title} className="clip" src={MDSndToSrc.get(this.props.sound)} />
+                <audio id={this.props.title} ref={this.audioRef} className="clip" src={MDSndToSrc.get(this.props.sound)} />
             </div>
         );
     }
