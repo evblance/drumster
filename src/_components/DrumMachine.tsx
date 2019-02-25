@@ -27,7 +27,7 @@ class DrumMachine extends Component<DrumMachineProps, DrumMachineState> {
 
     render(): JSX.Element {
         return (
-            <div id="drum-machine">
+            <div id="drum-machine" className="drum-machine">
                 <h1 className="app-title">Drum Machine</h1>
                 <DrumGrid handleSoundTrigger={this.reportSoundTrigger} />
                 <Display activeDrumpad={this.state.lastDrumpad} />

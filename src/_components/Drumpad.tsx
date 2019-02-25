@@ -11,7 +11,9 @@ interface DrumpadProps {
     onSoundTrigger: Function,
 }
 
-interface DrumpadState {}
+interface DrumpadState {
+    bPressed: boolean,
+}
 
 class Drumpad extends Component<DrumpadProps, DrumpadState> {
 
@@ -20,15 +22,19 @@ class Drumpad extends Component<DrumpadProps, DrumpadState> {
 
     constructor(props: DrumpadProps) {
         super(props);
-        this.state = {};
+        this.state = {
+            bPressed: false,
+        };
         this.audioRef = React.createRef();
         this.playSound = this.playSound.bind(this);
+        this.lightUp = this.lightUp.bind(this);
     }
 
     componentDidMount(): void {
         this.keypressListener = document.addEventListener('keypress', (event: KeyboardEvent) => {
             if (MDKeyToSnd.get(event.key) === this.props.sound) {
                 this.playSound();
+                this.lightUp();
             }
         });
     }
@@ -43,11 +49,24 @@ class Drumpad extends Component<DrumpadProps, DrumpadState> {
         this.props.onSoundTrigger(this.props.drumKey);
     }
 
+    // Handles the illumination of the drumpad based on keypress (pure CSS handles it for clicks)
+    lightUp(): void {
+        this.setState({
+            bPressed: true,
+        }, () => {
+            setTimeout(() => {
+                this.setState({
+                    bPressed: false,
+                })
+            }, 100);
+        });
+    }
+
     render(): JSX.Element {
         return (
             <div
                 id={this.props.sound}
-                className="drum-pad"
+                className={this.state.bPressed ? `drum-pad hit` : `drum-pad`}
                 onClick={this.playSound}
             >
                 { this.props.title }

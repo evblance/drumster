@@ -13,7 +13,7 @@ const Display = (props: DisplayProps) => {
         `-`;
     return (
         <div id="display" className="display">
-            Now playing: <div>{drumSoundVal}</div>
+            <div className="last-hit">{drumSoundVal}</div>
         </div>
     );
 }
