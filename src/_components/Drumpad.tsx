@@ -31,6 +31,7 @@ class Drumpad extends Component<DrumpadProps, DrumpadState> {
     }
 
     componentDidMount(): void {
+        // Register an event listener so we can trigger the correct drumpad sound on key presses
         this.keypressListener = document.addEventListener('keypress', (event: KeyboardEvent) => {
             if (MDKeyToSnd.get(event.key) === this.props.sound) {
                 this.playSound();
