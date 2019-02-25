@@ -4,7 +4,7 @@ A drum machine built in fullfilment of the FCC Front End Libraries Certification
 ## How to run
 
 ### Online
-TBC
+Simply navigate [here](https://evblance-drumster.netlify.com).
 
 ### Offline
 1. Clone or download this repo.
